@@ -1,5 +1,5 @@
 rabbit3:
-  image: hibadkin/rabbitmq-cluster-docker
+  image: bijukunjummen/rabbitmq-server
   hostname: rabbit3
   environment:
    - CLUSTERED=true
