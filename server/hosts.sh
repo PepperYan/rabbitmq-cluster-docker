@@ -1,6 +1,7 @@
 #!/bin/bash
-docker exec "$1_$1_1" touch /etc/hosts
-docker exec "$1_$1_1" grep "rabbit1" /etc/hosts
+echo "hosting"
+touch /etc/hosts
+grep "rabbit1" /etc/hosts
 if [ $? -ne 0 ]; then
   echo "hosts not exist"
   chmod 777 /etc/hosts
