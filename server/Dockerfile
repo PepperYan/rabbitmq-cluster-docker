@@ -15,12 +15,7 @@ RUN mkdir /opt/rabbit
 
 ADD startrabbit.sh /opt/rabbit/
 
-ADD hosts.sh /opt/rabbit/
-
 RUN chmod a+x /opt/rabbit/startrabbit.sh
-
-RUN chmod a+x /opt/rabbit/hosts.sh
-
 
 EXPOSE 5672
 EXPOSE 15672
@@ -33,5 +28,4 @@ EXPOSE 9103
 EXPOSE 9104
 EXPOSE 9105
 
-CMD sh /opt/rabbit/hosts.sh
 CMD /opt/rabbit/startrabbit.sh
