@@ -22,23 +22,15 @@
 #     esac
 #     echo "OPTIND is now $OPTIND"
 #   done
+#   
+# 获取当前目录路径
+cd `dirname $0`
+path=$PWD
 
-touch /etc/hosts
-grep "rabbit" /etc/hosts
-if [ $? -ne 0 ]; then
-  echo "hosts not exist"
-  chmod 777 /etc/hosts
-  echo "139.59.240.247 rabbit1" >> /etc/hosts
-  echo "139.59.240.230 rabbit2" >> /etc/hosts
-  echo "188.166.183.42 rabbit3" >> /etc/hosts
-  sync
-else
-  echo "hosts exist"
-fi
-
-cd "$1"
+#进入相应的目录
+cd "$path/$1"
 docker-compose up -d
-# 
+#
 # docker exec rabbit2_rabbit2_1 rabbitmqctl stop_app
 # docker exec rabbit2_rabbit2_1 rabbitmqctl join_cluster rabbit@rabbit1
 # docker exec rabbit2_rabbit2_1 rabbitmqctl start_app
