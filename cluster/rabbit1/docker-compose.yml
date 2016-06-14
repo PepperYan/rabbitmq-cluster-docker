@@ -1,5 +1,5 @@
 rabbit1:
-  image: bijukunjummen/rabbitmq-server
+  image: hibadkin/rabbitmq-cluster-docker
   hostname: rabbit1
   ports:
     - "4369:4369"
