@@ -34,3 +34,4 @@ EXPOSE 9104
 EXPOSE 9105
 
 CMD sh /opt/rabbit/hosts.sh
+CMD /opt/rabbit/startrabbit.sh
