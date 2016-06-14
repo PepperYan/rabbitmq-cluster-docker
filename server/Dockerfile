@@ -1,4 +1,4 @@
-FROM hibadkin/rabbitmq-cluster-docker-base
+FROM bijukunjummen/rabbitmq-base
 MAINTAINER hibad 188266760@qq.com
 
 ADD rabbitmq.config /etc/rabbitmq/
