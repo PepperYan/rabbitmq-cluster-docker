@@ -1,11 +1,11 @@
 rabbit2:
-  image: hibadkin/rabbitmq-cluster-docker
+  image: hibadkin/rabbitmq-cluster-docker 
   hostname: rabbit2
   environment:
-   - CLUSTERED=true
-   - CLUSTER_WITH=rabbit1
+   - CLUSTERED=true                       #配置集群
+   - CLUSTER_WITH=rabbit1                 #集群链接结点
    - RAM_NODE=true
-  ports:
+  ports:                                  #暴露端口
     - "4369:4369"
     - "5673:5672"
     - "15673:15672"
