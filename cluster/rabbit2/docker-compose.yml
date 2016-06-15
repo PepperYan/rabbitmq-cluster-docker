@@ -1,5 +1,5 @@
 rabbit2:
-  image: hibadkin/rabbitmq-cluster-docker 
+  image: hibadkin/rabbitmq-cluster-docker
   hostname: rabbit2
   environment:
    - CLUSTERED=true                       #配置集群
@@ -16,6 +16,3 @@ rabbit2:
     - "9103"
     - "9104"
     - "9105"
-  extra_hosts:
-    - "rabbit1:139.59.240.247"
-    - "rabbit3:188.166.183.42"
