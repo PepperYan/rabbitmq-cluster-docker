@@ -26,8 +26,9 @@ else
 			rabbitmqctl add_user $RABBITMQ_ADMIN $RABBITMQ_ADMIN_PWD 2>/dev/null
 			rabbitmqctl set_user_tags $RABBITMQ_ADMIN administrator
 			rabbitmqctl set_permissions -p / $RABBITMQ_ADMIN ".*" ".*" ".*"
+			rabbitmqctl delete_user guest
 		fi
-		
+
 		# Tail to keep the a foreground process active..
 		tail -f /var/log/rabbitmq/rabbit\@$HOSTNAME.log
 	fi
