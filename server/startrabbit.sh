@@ -27,8 +27,6 @@ else
 			rabbitmqctl set_user_tags $RABBITMQ_ADMIN administrator
 			rabbitmqctl set_permissions -p / $RABBITMQ_ADMIN ".*" ".*" ".*"
 		fi
-
-		chmod 600 /var/lib/rabbitmq/.erlang.cookie
 		
 		# Tail to keep the a foreground process active..
 		tail -f /var/log/rabbitmq/rabbit\@$HOSTNAME.log
