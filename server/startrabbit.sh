@@ -19,7 +19,9 @@ else
 		else
 			rabbitmqctl join_cluster --ram rabbit@$CLUSTER_WITH
 		fi
-		rabbitmqctl start_app		
+		rabbitmqctl start_app
+
+
 	fi
 fi
 
