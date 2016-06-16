@@ -11,7 +11,7 @@ else
 	rabbitmqctl set_user_tags $RABBITMQ_ADMIN administrator
 	rabbitmqctl set_permissions -p / $RABBITMQ_ADMIN ".*" ".*" ".*"
 	rabbitmqctl delete_user guest
-	rabbitmqctl start_app
+	rabbitmqctl stop_app
 fi
 
 if [ -z "$CLUSTERED" ]; then
