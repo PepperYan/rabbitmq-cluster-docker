@@ -1,17 +1,7 @@
 #!/bin/bash
 #
 
-#setting admin acount
-if [ -z "$RABBITMQ_ADMIN" ]; then
-	echo "not set any admin"
-else
-	rabbitmqctl start_app
-	rabbitmqctl add_user $RABBITMQ_ADMIN $RABBITMQ_ADMIN_PWD 2>/dev/null
-	rabbitmqctl set_user_tags $RABBITMQ_ADMIN administrator
-	rabbitmqctl set_permissions -p / $RABBITMQ_ADMIN ".*" ".*" ".*"
-	rabbitmqctl delete_user guest
-	rabbitmqctl stop_app
-fi
+
 
 if [ -z "$CLUSTERED" ]; then
 	# if not clustered then start it normally as if it is a single server
@@ -29,9 +19,19 @@ else
 		else
 			rabbitmqctl join_cluster --ram rabbit@$CLUSTER_WITH
 		fi
-		rabbitmqctl start_app
-
-		# Tail to keep the a foreground process active..
-		tail -f /var/log/rabbitmq/rabbit\@$HOSTNAME.log
+		rabbitmqctl start_app		
 	fi
 fi
+
+#setting admin acount
+if [ -z "$RABBITMQ_ADMIN" ]; then
+	echo "not set any admin"
+else
+	rabbitmqctl add_user $RABBITMQ_ADMIN $RABBITMQ_ADMIN_PWD 2>/dev/null
+	rabbitmqctl set_user_tags $RABBITMQ_ADMIN administrator
+	rabbitmqctl set_permissions -p / $RABBITMQ_ADMIN ".*" ".*" ".*"
+	rabbitmqctl delete_user guest
+fi
+
+# Tail to keep the a foreground process active..
+tail -f /var/log/rabbitmq/rabbit\@$HOSTNAME.log
