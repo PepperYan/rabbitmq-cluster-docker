@@ -1,8 +1,17 @@
 #!/bin/bash
 
-
 if [ -z "$CLUSTERED" ]; then
 	# if not clustered then start it normally as if it is a single server
+	( sleep 10 ; \
+
+	if [ -z "$RABBITMQ_ADMIN" ]; then
+		echo "not set any admin"
+	else
+		rabbitmqctl add_user $RABBITMQ_ADMIN $RABBITMQ_ADMIN_PWD 2>/dev/null
+		rabbitmqctl set_user_tags $RABBITMQ_ADMIN administrator
+		rabbitmqctl set_permissions -p / $RABBITMQ_ADMIN ".*" ".*" ".*"
+	fi
+	) &
 	/usr/sbin/rabbitmq-server
 
 else
