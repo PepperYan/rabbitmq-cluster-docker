@@ -5,7 +5,6 @@
 if [ -z "$RABBITMQ_ADMIN" ]; then
 	echo "not set any admin"
 else
-	rabbitmqctl stop_app
 	rabbitmqctl start_app
 	rabbitmqctl add_user $RABBITMQ_ADMIN $RABBITMQ_ADMIN_PWD 2>/dev/null
 	rabbitmqctl set_user_tags $RABBITMQ_ADMIN administrator
