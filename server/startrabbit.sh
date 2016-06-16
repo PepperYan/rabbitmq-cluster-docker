@@ -5,10 +5,13 @@
 if [ -z "$RABBITMQ_ADMIN" ]; then
 	echo "not set any admin"
 else
+	rabbitmqctl stop_app
+	rabbitmqctl start_app
 	rabbitmqctl add_user $RABBITMQ_ADMIN $RABBITMQ_ADMIN_PWD 2>/dev/null
 	rabbitmqctl set_user_tags $RABBITMQ_ADMIN administrator
 	rabbitmqctl set_permissions -p / $RABBITMQ_ADMIN ".*" ".*" ".*"
 	rabbitmqctl delete_user guest
+	rabbitmqctl start_app
 fi
 
 if [ -z "$CLUSTERED" ]; then
@@ -28,7 +31,7 @@ else
 			rabbitmqctl join_cluster --ram rabbit@$CLUSTER_WITH
 		fi
 		rabbitmqctl start_app
-		
+
 		# Tail to keep the a foreground process active..
 		tail -f /var/log/rabbitmq/rabbit\@$HOSTNAME.log
 	fi
