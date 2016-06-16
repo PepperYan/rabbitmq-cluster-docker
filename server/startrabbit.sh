@@ -6,6 +6,17 @@
 if [ -z "$CLUSTERED" ]; then
 	# if not clustered then start it normally as if it is a single server
 	/usr/sbin/rabbitmq-server
+
+	#setting admin acount
+	if [ -z "$RABBITMQ_ADMIN" ]; then
+		echo "not set any admin"
+	else
+		rabbitmqctl add_user $RABBITMQ_ADMIN $RABBITMQ_ADMIN_PWD 2>/dev/null
+		rabbitmqctl set_user_tags $RABBITMQ_ADMIN administrator
+		rabbitmqctl set_permissions -p / $RABBITMQ_ADMIN ".*" ".*" ".*"
+		rabbitmqctl delete_user guest
+	fi
+
 else
 	if [ -z "$CLUSTER_WITH" ]; then
 		# If clustered, but cluster with is not specified then again start normally, could be the first server in the
@@ -28,7 +39,7 @@ else
 			rabbitmqctl add_user $RABBITMQ_ADMIN $RABBITMQ_ADMIN_PWD 2>/dev/null
 			rabbitmqctl set_user_tags $RABBITMQ_ADMIN administrator
 			rabbitmqctl set_permissions -p / $RABBITMQ_ADMIN ".*" ".*" ".*"
-			#rabbitmqctl delete_user guest
+			rabbitmqctl delete_user guest
 		fi
 
 		# Tail to keep the a foreground process active..
